@@ -1,0 +1,68 @@
+.filter {
+  flex-shrink: 0;
+  display: inline-flex;
+  max-width: $maxWidth;
+  transition: margin $animationTime;
+  position: fixed;
+  z-index: 3;
+  margin-top: 70px;
+  width: 100%;
+  padding: 0 15px;
+
+  .filterContent {
+    border-radius: 16px;
+    background-color: $backgroundCard;
+    height: calc(0.631578947 * 100vh);
+    width: 100%;
+    margin-top: 70px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+    padding: 16px;
+  }
+
+  .btn-Filter {
+    color: $button;
+  }
+
+  .row,
+  input {
+    margin-top: 21px;
+  }
+
+  .menu {
+    @include flex();
+
+    p:last-child {
+      margin-left: auto;
+    }
+  }
+
+  .row {
+    @include flex();
+
+    p {
+      flex: 1;
+      font-size: 18.5px;
+      color: $iconColor;
+    }
+
+    :first-child {
+      margin-right: 16px;
+    }
+
+    :last-child {
+      margin-left: auto;
+    }
+  }
+}
+
+.filter-enter {
+  margin-top: 100vh;
+}
+.filter-enter-active {
+  margin-top: 70px;
+}
+.filter-exit {
+}
+.filter-exit-active {
+  margin-top: 100vh;
+}

@@ -1,26 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
 
-function App() {
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+
+import { User } from "./interfaces/User";
+
+import { Welcome } from "./pages/Welcome";
+import { Main } from "./pages/Main";
+import { Login } from "./pages/Login";
+import { Settings } from "./pages/Settings";
+
+export const App: React.FC = () => {
+  const [user, updateUser] = useState<User | null>(() => {
+    const fetchedUser = localStorage.getItem("user");
+    if (fetchedUser) return JSON.parse(fetchedUser);
+    return null;
+  });
+
+  useEffect(() => localStorage.setItem("user", JSON.stringify(user)), [user]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/login">
+          {user ? <Redirect to="" /> : <Login updateUser={updateUser} />}
+        </Route>
+        <Route path="/settings">
+          {user ? (
+            <Settings updateUser={updateUser} user={user} />
+          ) : (
+            <Redirect to="login" />
+          )}
+        </Route>
+        <Route path="/welcome">
+          {user ? <Redirect to="/" /> : <Welcome />}
+        </Route>
+        <Route path="/">
+          {user ? <Main user={user} /> : <Redirect to="welcome" />}
+        </Route>
+      </Switch>
+    </Router>
   );
-}
-
-export default App;
+};

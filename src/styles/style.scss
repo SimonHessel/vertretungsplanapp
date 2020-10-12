@@ -1,0 +1,172 @@
+@charset "UTF-8";
+@import "reset";
+
+$maxWidth: 970px;
+$primary: #3e5d99;
+$background: #fafafa;
+$backgroundCard: #fff;
+$textColor: #000;
+$enfall: #be1e2d;
+$iconColor: #707070;
+$placeholder: #c4c4c4;
+$backgroundInput: #f0f0f0;
+$button: #718ce1;
+$links: #3a5a97;
+$shadow: rgba(0, 0, 0, 0.2);
+$colorMoodle: #f98012;
+$animationTime: 0.5s;
+@mixin flex() {
+  display: flex;
+  align-items: center;
+}
+
+#root {
+  background: $background;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  box-sizing: border-box;
+  color: $textColor;
+}
+
+body,
+button,
+input {
+  background-color: $background;
+  font-weight: 400;
+  font-family: "-apple-system", "Roboto", sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  width: 100%;
+  max-width: $maxWidth;
+  float: left;
+  padding: 15px;
+}
+
+footer {
+  flex-shrink: 0;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  clear: both;
+  padding: 0 8px;
+  width: 100%;
+  max-width: $maxWidth;
+  height: 5vh;
+}
+
+input {
+  color: $textColor;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  margin-top: 12px;
+  background: $backgroundInput;
+  border-radius: 10px;
+  border: 0;
+  width: 100%;
+  height: 51px;
+  font-size: 21px;
+  padding: 0 16px;
+
+  &::placeholder {
+    color: $placeholder;
+  }
+
+  &::-webkit-input-placeholder {
+    color: $placeholder;
+  }
+
+  &::-moz-placeholder {
+    color: $placeholder;
+  }
+
+  &:-ms-input-placeholder {
+    color: $placeholder;
+  }
+
+  &:-moz-placeholder {
+    color: $placeholder;
+  }
+}
+
+input[type="submit"] {
+  background: $primary;
+  color: #fff;
+}
+
+a {
+  text-decoration: none;
+  color: $links;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.btnIcon {
+  color: $iconColor;
+  font-size: 23px;
+}
+
+.hidden {
+  display: none !important;
+  opacity: 0;
+}
+
+.background {
+  position: fixed;
+  z-index: 3;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0);
+  // background-color: rgba(117,117,117,0.5);
+  transition: all $animationTime;
+}
+@import "header";
+@import "content";
+@import "filter";
+@import "login";
+@import "welcome";
+@import "settings";
+@media only screen and (max-width: 347px) {
+  .container {
+    padding: 15px 2vw;
+  }
+}
+@media only screen and (max-width: 560px) and (orientation: portrait) {
+  td:nth-child(7),
+  th:nth-child(7) {
+    display: none;
+  }
+}
+@media (min-width: 768px) {
+  .container,
+  footer,
+  header {
+    max-width: 750px;
+  }
+}
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  .container,
+  footer,
+  header {
+    max-width: 970px;
+  }
+}
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+  .container,
+  footer,
+  header {
+    max-width: 1170px;
+  }
+}
