@@ -20,6 +20,7 @@
     "react-transition-group": "^4.4.1",
     "typescript": "~3.7.2"
   },
+  "homepage": "https://simonhessel.github.io/vertretungsplanapp",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
