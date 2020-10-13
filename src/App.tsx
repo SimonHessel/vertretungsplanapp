@@ -23,22 +23,22 @@ export const App: React.FC = () => {
 
   useEffect(() => localStorage.setItem("user", JSON.stringify(user)), [user]);
   return (
-    <Router>
+    <Router basename="/vertretungsplanapp">
       <Switch>
-        <Route path="/login">
+        <Route path="/login" exact>
           {user ? <Redirect to="" /> : <Login updateUser={updateUser} />}
         </Route>
-        <Route path="/settings">
+        <Route path="/settings" exact>
           {user ? (
             <Settings updateUser={updateUser} user={user} />
           ) : (
             <Redirect to="login" />
           )}
         </Route>
-        <Route path="/welcome">
+        <Route path="/welcome" exact>
           {user ? <Redirect to="/" /> : <Welcome />}
         </Route>
-        <Route path="/">
+        <Route path="/" exact>
           {user ? <Main user={user} /> : <Redirect to="welcome" />}
         </Route>
       </Switch>

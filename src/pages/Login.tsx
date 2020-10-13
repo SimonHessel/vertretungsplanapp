@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { User } from "../interfaces/User";
-
+import userData from "../data/user.json";
 interface loginProps {
   updateUser: React.Dispatch<React.SetStateAction<User | null>>;
 }
@@ -9,20 +9,12 @@ export const Login: React.FC<loginProps> = ({ updateUser }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const submit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // DEMO
 
-    const res = await fetch("/user.json", {
-      // method: "POST",
-      // body: JSON.stringify({ username, password }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (res.status === 200) updateUser(await res.json());
+    updateUser(userData);
   };
 
   return (

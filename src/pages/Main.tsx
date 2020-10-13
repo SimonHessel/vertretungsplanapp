@@ -11,6 +11,9 @@ import { Filter } from "../components/Filter";
 import { Plan } from "../interfaces/Plan";
 import { FilterValues } from "../interfaces/FilterValues";
 import { User } from "../interfaces/User";
+
+import planData from "../data/example.json";
+
 interface mainProps {
   user: User;
 }
@@ -19,18 +22,7 @@ export const Main: React.FC<mainProps> = ({ user }) => {
   const [plans, setPlans] = useState([]);
 
   useEffect(() => {
-    (async () => {
-      const res = await fetch("/example.json", {
-        // method: "POST",
-        // body: JSON.stringify({ username, password }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (res.status === 200)
-        setPlans(JSON.parse(await res.text(), jsonDateParser));
-    })();
+    setPlans(JSON.parse(JSON.stringify(planData), jsonDateParser));
   }, []);
 
   const [filterActive, setFilterActive] = useState(false);
