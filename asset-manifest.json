@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/vertretungsplanapp/static/css/main.aab3a057.chunk.css",
+    "main.js": "/vertretungsplanapp/static/js/main.8a99c029.chunk.js",
+    "main.js.map": "/vertretungsplanapp/static/js/main.8a99c029.chunk.js.map",
+    "runtime-main.js": "/vertretungsplanapp/static/js/runtime-main.302e8cab.js",
+    "runtime-main.js.map": "/vertretungsplanapp/static/js/runtime-main.302e8cab.js.map",
+    "static/js/2.adab79af.chunk.js": "/vertretungsplanapp/static/js/2.adab79af.chunk.js",
+    "static/js/2.adab79af.chunk.js.map": "/vertretungsplanapp/static/js/2.adab79af.chunk.js.map",
+    "index.html": "/vertretungsplanapp/index.html",
+    "precache-manifest.c77c4b2aefb3c93f12d561b66789c696.js": "/vertretungsplanapp/precache-manifest.c77c4b2aefb3c93f12d561b66789c696.js",
+    "service-worker.js": "/vertretungsplanapp/service-worker.js",
+    "static/css/main.aab3a057.chunk.css.map": "/vertretungsplanapp/static/css/main.aab3a057.chunk.css.map",
+    "static/js/2.adab79af.chunk.js.LICENSE.txt": "/vertretungsplanapp/static/js/2.adab79af.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.302e8cab.js",
+    "static/js/2.adab79af.chunk.js",
+    "static/css/main.aab3a057.chunk.css",
+    "static/js/main.8a99c029.chunk.js"
+  ]
+}
