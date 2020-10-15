@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b9492a52160b2abad61d1a062368769c",
+    "revision": "e24314ab82e1fe97da44a2a64e9d00f7",
     "url": "/vertretungsplanapp/index.html"
   },
   {
-    "revision": "898b85d64d0f47926ead",
+    "revision": "2c577f3a8358ce1a17b1",
     "url": "/vertretungsplanapp/static/css/main.d8f38936.chunk.css"
   },
   {
-    "revision": "83ac31c9fad766e895ed",
-    "url": "/vertretungsplanapp/static/js/2.a0f78fd5.chunk.js"
+    "revision": "d8f028759077c980761b",
+    "url": "/vertretungsplanapp/static/js/2.501559b8.chunk.js"
   },
   {
     "revision": "c64c486544348f10a6d6c716950bc223",
-    "url": "/vertretungsplanapp/static/js/2.a0f78fd5.chunk.js.LICENSE.txt"
+    "url": "/vertretungsplanapp/static/js/2.501559b8.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "898b85d64d0f47926ead",
-    "url": "/vertretungsplanapp/static/js/main.d873c093.chunk.js"
+    "revision": "2c577f3a8358ce1a17b1",
+    "url": "/vertretungsplanapp/static/js/main.aa4f0455.chunk.js"
   },
   {
     "revision": "214ca469e9347facc657",
