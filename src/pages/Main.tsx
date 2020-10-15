@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { jsonDateParser } from "json-date-parser";
 import { FaCog, FaFilter } from "react-icons/fa";
 import { CSSTransition } from "react-transition-group";
@@ -10,32 +10,24 @@ import { Filter } from "../components/Filter";
 
 import { Plan } from "../interfaces/Plan";
 import { FilterValues } from "../interfaces/FilterValues";
-import { User } from "../interfaces/User";
 
 import planData from "../data/example.json";
+import { AppContext } from "../context/AppProvider";
 
-interface mainProps {
-  user: User;
-}
+interface mainProps {}
 
-export const Main: React.FC<mainProps> = ({ user }) => {
+export const Main: React.FC<mainProps> = () => {
   const [plans, setPlans] = useState([]);
+  const {
+    state: { user, filterValues },
+  } = useContext(AppContext);
 
   useEffect(() => {
     setPlans(JSON.parse(JSON.stringify(planData), jsonDateParser));
   }, []);
 
   const [filterActive, setFilterActive] = useState(false);
-  const [filterValues, setFilterValues] = useState<FilterValues>(() => {
-    const fetchedFilterValues = localStorage.getItem("filterValues");
-    if (fetchedFilterValues) return JSON.parse(fetchedFilterValues);
-    return { courses: [] };
-  });
 
-  useEffect(
-    () => localStorage.setItem("filterValues", JSON.stringify(filterValues)),
-    [filterValues]
-  );
   const toggle = () => setFilterActive(!filterActive);
   return (
     <>
@@ -104,12 +96,7 @@ export const Main: React.FC<mainProps> = ({ user }) => {
         timeout={500}
         unmountOnExit
       >
-        <Filter
-          user={user}
-          toggle={toggle}
-          filterValues={filterValues}
-          setFilterValues={setFilterValues}
-        />
+        <Filter toggle={toggle} />
       </CSSTransition>
 
       <Footer />

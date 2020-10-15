@@ -1,21 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaTag, FaTrash } from "react-icons/fa";
+import { AppContext } from "../context/AppProvider";
 import { FilterValues } from "../interfaces/FilterValues";
 import { User } from "../interfaces/User";
 
 interface FilterProps {
-  user: User;
   toggle: () => void;
-  filterValues: FilterValues;
-  setFilterValues: React.Dispatch<React.SetStateAction<FilterValues>>;
 }
 
-export const Filter: React.FC<FilterProps> = ({
-  user: { username },
-  toggle,
-  filterValues,
-  setFilterValues,
-}) => {
+export const Filter: React.FC<FilterProps> = ({ toggle }) => {
+  const {
+    state: { user, filterValues },
+    dispatch,
+  } = useContext(AppContext);
   const [filter, setFilter] = useState<string>("");
   const [cache] = useState<FilterValues>(filterValues);
 
@@ -23,26 +20,22 @@ export const Filter: React.FC<FilterProps> = ({
     if (filter.length > 0) {
       if (isNaN(filter[0] as any)) {
         if (!filterValues.courses.includes(filter))
-          setFilterValues({
-            ...filterValues,
-            courses: [...filterValues.courses, filter],
-          });
+          dispatch({ type: "ADD_COURSE", payload: filter });
       } else {
-        setFilterValues({ ...filterValues, class: filter });
+        dispatch({ type: "ADD_CLASS", payload: filter });
       }
       setFilter("");
+    } else {
+      toggle();
     }
   };
 
   const removeFilter = (value: string) => {
     console.log(filterValues.class === value);
     if (filterValues.class === value || filterValues.key === value)
-      setFilterValues({ courses: filterValues.courses });
+      dispatch({ type: "REMOVE_CLASS_OR_KEY", payload: value });
     else {
-      setFilterValues({
-        ...filterValues,
-        courses: filterValues.courses.filter((item) => item !== value),
-      });
+      dispatch({ type: "REMOVE_COURSE", payload: value });
     }
   };
 
@@ -52,7 +45,7 @@ export const Filter: React.FC<FilterProps> = ({
         <div className="menu">
           <p
             onClick={() => {
-              setFilterValues(cache);
+              dispatch({ type: "LOAD_CACHE", payload: cache });
               toggle();
             }}
             className="btn btn-Filter"
@@ -80,7 +73,9 @@ export const Filter: React.FC<FilterProps> = ({
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
             placeholder={
-              username.includes("mpg") ? "Kürzel" : "Stufe oder Kurs"
+              (user as User).username.includes("mpg")
+                ? "Kürzel"
+                : "Stufe oder Kurs"
             }
           />
         </form>

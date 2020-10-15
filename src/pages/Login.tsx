@@ -1,11 +1,10 @@
-import React, { useState } from "react";
-import { User } from "../interfaces/User";
+import React, { useContext, useState } from "react";
 import userData from "../data/user.json";
-interface loginProps {
-  updateUser: React.Dispatch<React.SetStateAction<User | null>>;
-}
+import { AppContext } from "../context/AppProvider";
+interface loginProps {}
 
-export const Login: React.FC<loginProps> = ({ updateUser }) => {
+export const Login: React.FC<loginProps> = () => {
+  const { dispatch } = useContext(AppContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -14,7 +13,10 @@ export const Login: React.FC<loginProps> = ({ updateUser }) => {
 
     // DEMO
 
-    updateUser(userData);
+    dispatch({
+      payload: userData,
+      type: "UPDATE_USER",
+    });
   };
 
   return (

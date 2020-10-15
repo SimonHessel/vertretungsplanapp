@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
-import { User } from "../interfaces/User";
+import { AppContext } from "../context/AppProvider";
 
-interface settingsProps {
-  user: User | null;
-  updateUser: React.Dispatch<React.SetStateAction<User | null>>;
-}
+interface settingsProps {}
 
-export const Settings: React.FC<settingsProps> = ({ user, updateUser }) => {
+export const Settings: React.FC<settingsProps> = () => {
+  const {
+    state: { user },
+    dispatch,
+  } = useContext(AppContext);
   return (
     <>
       <Header
@@ -37,7 +38,10 @@ export const Settings: React.FC<settingsProps> = ({ user, updateUser }) => {
                           onChange={(e) => {
                             const updatedUser: any = {};
                             updatedUser[setting] = !(user as any)[setting];
-                            updateUser({ ...user, ...updatedUser });
+                            dispatch({
+                              type: "UPDATE_USER",
+                              payload: { ...user, ...updatedUser },
+                            });
                           }}
                         />
                         <span className="slider round"></span>
@@ -52,7 +56,12 @@ export const Settings: React.FC<settingsProps> = ({ user, updateUser }) => {
             <h1>Logout</h1>
             <div>
               <FaChevronRight
-                onClick={() => updateUser(null)}
+                onClick={() =>
+                  dispatch({
+                    type: "UPDATE_USER",
+                    payload: null,
+                  })
+                }
                 className="btnIcon"
               />
             </div>

@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 
-import { User } from "./interfaces/User";
+import { AppProvider } from "./context/AppProvider";
+
+import { AuthGuard } from "./components/AuthGuard";
 
 import { Welcome } from "./pages/Welcome";
 import { Main } from "./pages/Main";
@@ -15,33 +12,37 @@ import { Login } from "./pages/Login";
 import { Settings } from "./pages/Settings";
 
 export const App: React.FC = () => {
-  const [user, updateUser] = useState<User | null>(() => {
-    const fetchedUser = localStorage.getItem("user");
-    if (fetchedUser) return JSON.parse(fetchedUser);
-    return null;
-  });
-
-  useEffect(() => localStorage.setItem("user", JSON.stringify(user)), [user]);
   return (
-    <Router basename="/vertretungsplanapp">
-      <Switch>
-        <Route path="/login" exact>
-          {user ? <Redirect to="" /> : <Login updateUser={updateUser} />}
-        </Route>
-        <Route path="/settings" exact>
-          {user ? (
-            <Settings updateUser={updateUser} user={user} />
-          ) : (
-            <Redirect to="login" />
-          )}
-        </Route>
-        <Route path="/welcome" exact>
-          {user ? <Redirect to="/" /> : <Welcome />}
-        </Route>
-        <Route path="/" exact>
-          {user ? <Main user={user} /> : <Redirect to="welcome" />}
-        </Route>
-      </Switch>
-    </Router>
+    <AppProvider>
+      <Router basename="/vertretungsplanapp">
+        <Switch>
+          <AuthGuard
+            path="/login"
+            secure={false}
+            redirect="/"
+            component={Login}
+          />
+          <AuthGuard
+            path="/welcome"
+            secure={false}
+            redirect="/"
+            component={Welcome}
+          />
+
+          <AuthGuard
+            path="/settings"
+            secure={true}
+            redirect="/login"
+            component={Settings}
+          />
+          <AuthGuard
+            path="/"
+            secure={true}
+            redirect="/login"
+            component={Main}
+          />
+        </Switch>
+      </Router>
+    </AppProvider>
   );
 };
